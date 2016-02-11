@@ -1,26 +1,30 @@
 package heap
 
-import ()
+// A comparison function type
+type CompFunc func(a interface{}, b interface{}) bool
 
 // A default Heap struct
 // It is a binary heap, using a slice to store data
 // A comparison function must be supplied for swapping condition
 type Heap struct {
 	data []interface{}
-	comp func(a interface{}, b interface{}) bool
+	comp CompFunc
 }
 
-// Returns the item by a given index
+// Return the item by index
 func (h Heap) At(i int) interface{} {
 	return h.data[i]
+}
+
+// Swap the element of internal array by index
+func (h Heap) Swap(i int, j int) {
+	swap(h.data, i, j)
 }
 
 // For all the items in the data array
 // Run heapify operations
 func (h Heap) BuildHeap() {
-	for i := h.Size() / 2; i >= 0; i-- {
-		h.heapify(i)
-	}
+	heapifyAll(h.data, h.comp)
 }
 
 // Clear all data for this heap
@@ -28,52 +32,76 @@ func (h *Heap) Clear() {
 	h.data = h.data[:0]
 }
 
-// Returns true if the heap is empty
+// Return true if the heap is empty
 // false otherwise
 func (h Heap) Empty() bool {
 	return (h.Size() == 0)
 }
 
-// Returns the number items for this heap
+// Return the number items for this heap
 func (h Heap) Size() int {
 	return len(h.data)
+}
+
+// Sort all the element by HeapSort
+func (h Heap) HeapSort() {
+	h.BuildHeap()
+	l := len(h.data)
+	for i := l - 1; i > 0; i-- {
+		swap(h.data, 0, i)
+		h.data = h.data[:len(h.data)-1]
+		heapify(h.data, 0, h.comp)
+	}
 }
 
 // ========================
 // helper functions
 // ========================
 
-// Returns the index of left child
+// Swap element for a slice by index
+func swap(A []interface{}, a int, b int) {
+	A[a], A[b] = A[b], A[a]
+}
+
+// Return the index of left child
 func left(i int) int {
 	return i*2 + 1
 }
 
-// Returns the index of right child
+// Return the index of right child
 func right(i int) int {
 	return i*2 + 2
 }
 
-// Returns the index of parent
+// Return the index of parent
 func parent(i int) int {
 	return i / 2
 }
 
+func heapifyAll(A []interface{}, f CompFunc) {
+	size := len(A)
+	for i := size / 2; i >= 0; i-- {
+		heapify(A, i, f)
+	}
+}
+
 // Recursively run heapify operation
 // To maintain the heap property
-func (h *Heap) heapify(i int) {
+func heapify(A []interface{}, i int, f CompFunc) {
 	l := left(i)
 	r := right(i)
 	need := i
-	if l < h.Size() && h.comp(h.data[l], h.data[i]) {
+	size := len(A)
+	if l < size && f(A[l], A[i]) {
 		need = l
 	} else {
 		need = i
 	}
-	if r < h.Size() && h.comp(h.data[r], h.data[need]) {
+	if r < size && f(A[r], A[need]) {
 		need = r
 	}
 	if need != i {
-		h.data[i], h.data[need] = h.data[need], h.data[i]
-		h.heapify(need)
+		A[i], A[need] = A[need], A[i]
+		heapify(A, need, f)
 	}
 }
