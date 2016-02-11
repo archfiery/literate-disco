@@ -1,15 +1,24 @@
 package vector
 
+import (
+	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/container/error"
+	"time"
+)
+
 const (
 	INIT_CAP = 1024
 )
 
 type Vector struct {
 	data []interface{}
+	comp container.CompFunc
 }
 
-func (v *Vector) Init() {
-	v.data = make([]interface{}, 0, INIT_CAP)
+func MakeVector(comp container.CompFunc) Vector {
+	slice := make([]interface{}, 0, INIT_CAP)
+	v := Vector{slice, comp}
+	return v
 }
 
 func (v *Vector) Clear() {
@@ -26,6 +35,24 @@ func (v Vector) Size() int {
 
 func (v Vector) MaxSize() int {
 	return cap(v.data)
+}
+
+func (v *Vector) PushBack(a interface{}) {
+	if (moreThanHalf(v.data)) {
+		v.data = doubleSlice(&v.data)
+	}
+	v.data = append(v.data, a)
+}
+
+func (v Vector) Front() interface{} {
+	return v.data[0]
+}
+
+func (v Vector) At(i int) (interface{}, *error.OutOfRangeError) {
+	if i < 0 || i > len(v.data) - 1 {
+		return 0, &error.OutOfRangeError{time.Now()}
+	}
+	return v.data[i], nil
 }
 
 //================
