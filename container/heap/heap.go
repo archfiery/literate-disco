@@ -78,6 +78,7 @@ func parent(i int) int {
 	return i / 2
 }
 
+// Run heapify function on all items for an array
 func heapifyAll(A []interface{}, f CompFunc) {
 	size := len(A)
 	for i := size / 2; i >= 0; i-- {
