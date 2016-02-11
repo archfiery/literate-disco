@@ -1,14 +1,15 @@
 package heap
 
-// A comparison function type
-type CompFunc func(a interface{}, b interface{}) bool
+import(
+	"github.com/archfiery/literate-disco/container"
+)
 
 // A default Heap struct
 // It is a binary heap, using a slice to store data
 // A comparison function must be supplied for swapping condition
 type Heap struct {
 	data []interface{}
-	comp CompFunc
+	comp container.CompFunc
 }
 
 // Return the item by index
@@ -79,7 +80,7 @@ func parent(i int) int {
 }
 
 // Run heapify function on all items for an array
-func heapifyAll(A []interface{}, f CompFunc) {
+func heapifyAll(A []interface{}, f container.CompFunc) {
 	size := len(A)
 	for i := size / 2; i >= 0; i-- {
 		heapify(A, i, f)
@@ -88,7 +89,7 @@ func heapifyAll(A []interface{}, f CompFunc) {
 
 // Recursively run heapify operation
 // To maintain the heap property
-func heapify(A []interface{}, i int, f CompFunc) {
+func heapify(A []interface{}, i int, f container.CompFunc) {
 	l := left(i)
 	r := right(i)
 	need := i

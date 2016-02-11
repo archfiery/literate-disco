@@ -3,6 +3,7 @@ package heap
 import (
 	"fmt"
 	"testing"
+	"github.com/archfiery/literate-disco/container"
 )
 
 func LessThan(a interface{}, b interface{}) bool {
@@ -110,7 +111,7 @@ func TestBasicOps(t *testing.T) {
 }
 
 // Return true if slice A is sorted according to comparison function f
-func IsSorted(A []interface{}, f CompFunc) bool {
+func IsSorted(A []interface{}, f container.CompFunc) bool {
 	for i := 0; i < len(A)-1; i++ {
 		if f(A[i+1], A[i]) != true {
 			return false
