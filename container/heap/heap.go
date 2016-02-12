@@ -12,6 +12,11 @@ type Heap struct {
 	comp container.CompFunc
 }
 
+// Returns a new binary heap by a given data and comparison function
+func MakeHeap(data []interface{}, comp container.CompFunc) Heap {
+	return Heap{data, comp}
+}
+
 // Returns the element by index
 func (h Heap) At(i int) interface{} {
 	return h.data[i]

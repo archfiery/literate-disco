@@ -37,7 +37,7 @@ func TestHeapify(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := Heap{array, LessThan}
+	heap := MakeHeap(array, LessThan)
 	// verify heap size
 	if heap.Size() != 3 {
 		t.Fatal("The size does not match")
@@ -80,7 +80,7 @@ func TestBuildHeap(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := Heap{array, LessThan}
+	heap := MakeHeap(array, LessThan)
 	heap.BuildHeap()
 
 	// expected answer for test array
@@ -105,7 +105,7 @@ func TestBasicOps(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := Heap{array, LessThan}
+	heap := MakeHeap(array, LessThan)
 	heap.BuildHeap()
 	// test Size()
 	if heap.Size() != 5 {
