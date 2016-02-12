@@ -8,7 +8,7 @@ import (
 // It is usually thrown for a slice
 type OutOfRangeError struct {}
 
-// Return string describing the error
+// Returns a string describing the error
 func (err OutOfRangeError) Error() string {
 	return fmt.Sprintf("Index Out Of Range")
 }
@@ -20,7 +20,7 @@ type TypeNotMatchError struct {
 	T2   string
 }
 
-// Return string describing the error
+// Returns a string describing the error
 func (err TypeNotMatchError) Error() string {
 	return fmt.Sprintf("Type %v and type %v do not match", err.T1, err.T2)
 }

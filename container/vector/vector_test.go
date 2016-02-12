@@ -96,6 +96,7 @@ func TestPushBack(t *testing.T) {
 	}
 }
 
+// Test PopBack() function in vector.go
 func TestPopBack(t *testing.T) {
 	fmt.Println("TestPushBack")
 	f := lessThanVectorTest
@@ -121,6 +122,7 @@ func TestPopBack(t *testing.T) {
 	}
 }
 
+// Test Insert() function in vector.go
 func TestInsert(t *testing.T) {
 	fmt.Println("TestInsert")
 	f := lessThanVectorTest

@@ -12,39 +12,39 @@ type Heap struct {
 	comp container.CompFunc
 }
 
-// Return the item by index
+// Returns the element by index
 func (h Heap) At(i int) interface{} {
 	return h.data[i]
 }
 
-// Swap the element of internal array by index
+// Swaps the element on internal array by index
 func (h Heap) Swap(i int, j int) {
 	swap(h.data, i, j)
 }
 
-// For all the items in the data array
-// Run heapify operations
+// For all the elements in the data array
+// Runs heapify operations
 func (h Heap) BuildHeap() {
 	heapifyAll(h.data, h.comp)
 }
 
-// Clear all data for this heap
+// Clears all elements in the heap
 func (h *Heap) Clear() {
 	h.data = h.data[:0]
 }
 
-// Return true if the heap is empty
+// Returns true if the heap is empty
 // false otherwise
 func (h Heap) Empty() bool {
 	return (h.Size() == 0)
 }
 
-// Return the number items for this heap
+// Returns the number of elements for this heap
 func (h Heap) Size() int {
 	return len(h.data)
 }
 
-// Sort all the element by HeapSort
+// Sorts all the elements by HeapSort
 func (h Heap) HeapSort() {
 	h.BuildHeap()
 	l := len(h.data)
@@ -59,27 +59,27 @@ func (h Heap) HeapSort() {
 // helper functions
 // ========================
 
-// Swap element for a slice by index
+// Swaps element for a slice by index
 func swap(A []interface{}, a int, b int) {
 	A[a], A[b] = A[b], A[a]
 }
 
-// Return the index of left child
+// Returns the index of left child
 func left(i int) int {
 	return i*2 + 1
 }
 
-// Return the index of right child
+// Returns the index of right child
 func right(i int) int {
 	return i*2 + 2
 }
 
-// Return the index of parent
+// Returns the index of parent
 func parent(i int) int {
 	return i / 2
 }
 
-// Run heapify function on all items for an array
+// Runs heapify function on all items for an array
 func heapifyAll(A []interface{}, f container.CompFunc) {
 	size := len(A)
 	for i := size / 2; i >= 0; i-- {
@@ -87,8 +87,7 @@ func heapifyAll(A []interface{}, f container.CompFunc) {
 	}
 }
 
-// Recursively run heapify operation
-// To maintain the heap property
+// Recursively runs the heapify operation in order to maintain the heap property
 func heapify(A []interface{}, i int, f container.CompFunc) {
 	l := left(i)
 	r := right(i)
