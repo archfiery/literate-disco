@@ -3,9 +3,12 @@ package vector
 import (
 	"fmt"
 	"testing"
+	"github.com/archfiery/literate-disco/container/error"
+	"reflect"
 )
 
-func TestIsHalf(t *testing.T) {
+// Test moreThanHalf() function in vector.go
+func TestMoreThanHalf(t *testing.T) {
 	fmt.Println("TestMoreThanHalf")
 	A := make([]interface{}, 0, 4)
 	if moreThanHalf(A) != false {
@@ -19,28 +22,43 @@ func TestIsHalf(t *testing.T) {
 	}
 }
 
+// Test doubleSlice() function in vector.go
 func TestDoubleSlice(t *testing.T) {
 	fmt.Println("TestDoubleSlice")
 	prevCap := 10
 	A := make([]interface{}, 0, prevCap)
 	B := doubleSlice(&A)
-	if cap(B) != prevCap * 2 {
-		t.Fatal("cap are not doubled, expected ", prevCap * 2, ", but get ", cap(B))
+	if cap(B) != prevCap*2 {
+		t.Fatal("cap are not doubled, expected ", prevCap*2, ", but get ", cap(B))
 	}
 }
 
-func lessThanVectorTest(a interface{}, b interface{}) bool {
+// A lessThan function with type matching
+// It throws TypeNotMatch error when a and b are not of the same type
+func lessThanVectorTest(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+	if reflect.TypeOf(a) != reflect.TypeOf(b) {
+		st1, st2 := reflect.TypeOf(a).String(), reflect.TypeOf(b).String()
+		return false, &error.TypeNotMatchError{st1, st2}
+	}
 	switch a := a.(type) {
 	case int:
-		if a < b.(int) {return true}
+		if a < b.(int) {
+			return true, nil
+		}
 	case byte:
-		if a < b.(byte) {return true}
+		if a < b.(byte) {
+			return true, nil
+		}
 	case string:
-		if a < b.(string) {return true}
+		if a < b.(string) {
+			return true, nil
+		}
 	}
-	return false
+	return false, nil
 }
 
+// Test PushBack() function in vector.go
+// It tests int, byte and string
 func TestPushBack(t *testing.T) {
 	fmt.Println("TestPushBack")
 	f := lessThanVectorTest
@@ -57,7 +75,7 @@ func TestPushBack(t *testing.T) {
 	vec2 := MakeVector(f)
 	vec2.PushBack('A' + 35)
 	val, err = vec2.At(0)
-	if err != nil || val != 'A' + 35 {
+	if err != nil || val != 'A'+35 {
 		t.Fatal("The push does not work properly!")
 	}
 

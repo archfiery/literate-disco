@@ -94,13 +94,19 @@ func heapify(A []interface{}, i int, f container.CompFunc) {
 	r := right(i)
 	need := i
 	size := len(A)
-	if l < size && f(A[l], A[i]) {
-		need = l
+	if l < size {
+		val, err := f(A[l], A[i])
+		if err == nil && val == true {
+			need = l
+		}
 	} else {
 		need = i
 	}
-	if r < size && f(A[r], A[need]) {
-		need = r
+	if r < size {
+		val, err := f(A[r], A[need])
+		if err == nil && val == true {
+			need = r
+		}
 	}
 	if need != i {
 		A[i], A[need] = A[need], A[i]

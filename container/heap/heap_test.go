@@ -4,14 +4,27 @@ import (
 	"fmt"
 	"testing"
 	"github.com/archfiery/literate-disco/container"
+	"reflect"
+	"github.com/archfiery/literate-disco/container/error"
 )
 
-func LessThan(a interface{}, b interface{}) bool {
-	return a.(int) < b.(int)
+func LessThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+	if reflect.TypeOf(a) != reflect.TypeOf(b) {
+		st1 := reflect.TypeOf(a).String()
+		st2 := reflect.TypeOf(b).String()
+		return false, &error.TypeNotMatchError{st1, st2}
+
+	}
+	return a.(int) < b.(int), nil
 }
 
-func MoreThan(a interface{}, b interface{}) bool {
-	return a.(int) > b.(int)
+func MoreThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+	if reflect.TypeOf(a) != reflect.TypeOf(b) {
+		st1 := reflect.TypeOf(a).String()
+		st2 := reflect.TypeOf(b).String()
+		return false, &error.TypeNotMatchError{st1, st2}
+	}
+	return a.(int) > b.(int), nil
 }
 
 // Test heapify() function in heap.go
@@ -43,12 +56,14 @@ func VerifyHeapProperty(heap Heap) bool {
 		l := left(i)
 		r := right(i)
 		if l < heap.Size() {
-			if !heap.comp(heap.At(i), heap.At(l)) {
+			val, err := heap.comp(heap.At(i), heap.At(l))
+			if err == nil && val == false {
 				valid = false
 			}
 		}
 		if r < heap.Size() {
-			if !heap.comp(heap.At(i), heap.At(l)) {
+			val, err := heap.comp(heap.At(i), heap.At(l))
+			if err == nil && val == false {
 				valid = false
 			}
 		}
@@ -113,7 +128,8 @@ func TestBasicOps(t *testing.T) {
 // Return true if slice A is sorted according to comparison function f
 func IsSorted(A []interface{}, f container.CompFunc) bool {
 	for i := 0; i < len(A)-1; i++ {
-		if f(A[i+1], A[i]) != true {
+		val, err := f(A[i+1], A[i])
+		if err == nil && val != true {
 			return false
 		}
 	}
