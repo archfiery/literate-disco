@@ -2,7 +2,7 @@ package vector
 
 import (
 	"github.com/archfiery/literate-disco/container"
-	"github.com/archfiery/literate-disco/container/error"
+	"github.com/archfiery/literate-disco/error"
 )
 
 const (

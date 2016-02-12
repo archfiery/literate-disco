@@ -2,7 +2,7 @@ package vector
 
 import (
 	"fmt"
-	"github.com/archfiery/literate-disco/container/error"
+	"github.com/archfiery/literate-disco/error"
 	"reflect"
 	"testing"
 )
