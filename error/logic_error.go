@@ -9,7 +9,7 @@ import (
 type OutOfRangeError struct{}
 
 // Returns a string describing the error
-func (err *OutOfRangeError) Error() string {
+func (err OutOfRangeError) Error() string {
 	return fmt.Sprintf("Index Out Of Range")
 }
 
@@ -21,7 +21,7 @@ type TypeNotMatchError struct {
 }
 
 // Returns a string describing the error
-func (err *TypeNotMatchError) Error() string {
+func (err TypeNotMatchError) Error() string {
 	return fmt.Sprintf("Type %v and type %v do not match", err.T1, err.T2)
 }
 
@@ -30,6 +30,6 @@ func (err *TypeNotMatchError) Error() string {
 type AssertionError struct{}
 
 // Returns a string describing the error
-func (err *AssertionError) Error() string {
+func (err AssertionError) Error() string {
 	return fmt.Sprintf("Assertion error")
 }

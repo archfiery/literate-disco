@@ -38,7 +38,7 @@ func TestDoubleSlice(t *testing.T) {
 func lessThanVectorTest(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1, st2 := reflect.TypeOf(a).String(), reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
+		return false, error.TypeNotMatchError{st1, st2}
 	}
 	switch a := a.(type) {
 	case int:
