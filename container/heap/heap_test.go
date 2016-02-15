@@ -2,10 +2,10 @@ package heap
 
 import (
 	"fmt"
-	"testing"
 	"github.com/archfiery/literate-disco/container"
-	"reflect"
 	"github.com/archfiery/literate-disco/error"
+	"reflect"
+	"testing"
 )
 
 func LessThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
