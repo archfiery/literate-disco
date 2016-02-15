@@ -2,7 +2,7 @@ package vector
 
 import (
 	"github.com/archfiery/literate-disco/container"
-	"github.com/archfiery/literate-disco/container/error"
+	"github.com/archfiery/literate-disco/error"
 )
 
 const (
@@ -67,7 +67,7 @@ func (v *Vector) PushBack(a interface{}) {
 // Removes the last element in the vector
 func (v *Vector) PopBack() *error.OutOfRangeError {
 	if (v.Size() <= 0) {
-		return &error.OutOfRangeError{}
+		return new(error.OutOfRangeError)
 	}
 	v.data = v.data[:v.Size() - 1]
 	return nil
@@ -80,7 +80,7 @@ func (v *Vector) Insert(index int, a interface{}) *error.OutOfRangeError {
 	}
 	// when the index is invalid
 	if index > v.Size() || index < 0{
-		return &error.OutOfRangeError{}
+		return new(error.OutOfRangeError)
 	}
 	// when the index is the last
 	if index == v.Size() {
@@ -105,7 +105,7 @@ func (v *Vector) Insert(index int, a interface{}) *error.OutOfRangeError {
 // Returns the first element in the vector
 func (v Vector) Front() (interface{}, *error.OutOfRangeError) {
 	if v.Size() <= 0 {
-		return 0, &error.OutOfRangeError{}
+		return 0, new(error.OutOfRangeError)
 	}
 	return v.data[0], nil
 }
@@ -121,7 +121,7 @@ func (v Vector) Back() (interface{}, *error.OutOfRangeError) {
 // Returns the item at index
 func (v Vector) At(i int) (interface{}, *error.OutOfRangeError) {
 	if i < 0 || i > v.Size()-1 {
-		return 0, &error.OutOfRangeError{}
+		return 0, new(error.OutOfRangeError)
 	}
 	return v.data[i], nil
 }

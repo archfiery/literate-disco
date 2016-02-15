@@ -2,13 +2,13 @@ package heap
 
 import (
 	"fmt"
-	"testing"
 	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/error"
 	"reflect"
-	"github.com/archfiery/literate-disco/container/error"
+	"testing"
 )
 
-func LessThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+func LessThan(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
@@ -18,7 +18,7 @@ func LessThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
 	return a.(int) < b.(int), nil
 }
 
-func MoreThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+func MoreThan(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
@@ -37,7 +37,7 @@ func TestHeapify(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := Heap{array, LessThan}
+	heap := MakeHeap(array, LessThan)
 	// verify heap size
 	if heap.Size() != 3 {
 		t.Fatal("The size does not match")
@@ -80,7 +80,7 @@ func TestBuildHeap(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := Heap{array, LessThan}
+	heap := MakeHeap(array, LessThan)
 	heap.BuildHeap()
 
 	// expected answer for test array
@@ -105,7 +105,7 @@ func TestBasicOps(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := Heap{array, LessThan}
+	heap := MakeHeap(array, LessThan)
 	heap.BuildHeap()
 	// test Size()
 	if heap.Size() != 5 {

@@ -1,6 +1,6 @@
 package heap
 
-import(
+import (
 	"github.com/archfiery/literate-disco/container"
 )
 
@@ -10,6 +10,11 @@ import(
 type Heap struct {
 	data []interface{}
 	comp container.CompFunc
+}
+
+// Returns a new binary heap by a given data and comparison function
+func MakeHeap(data []interface{}, comp container.CompFunc) Heap {
+	return Heap{data, comp}
 }
 
 // Returns the element by index
@@ -76,7 +81,7 @@ func right(i int) int {
 
 // Returns the index of parent
 func parent(i int) int {
-	return i / 2
+	return (i - 1) / 2
 }
 
 // Runs heapify function on all items for an array
@@ -88,6 +93,7 @@ func heapifyAll(A []interface{}, f container.CompFunc) {
 }
 
 // Recursively runs the heapify operation in order to maintain the heap property
+// at the subtree of rooted at i
 func heapify(A []interface{}, i int, f container.CompFunc) {
 	l := left(i)
 	r := right(i)
