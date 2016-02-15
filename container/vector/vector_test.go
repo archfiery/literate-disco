@@ -35,7 +35,7 @@ func TestDoubleSlice(t *testing.T) {
 
 // A lessThan function with type matching
 // It throws TypeNotMatch error when a and b are not of the same type
-func lessThanVectorTest(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+func lessThanVectorTest(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1, st2 := reflect.TypeOf(a).String(), reflect.TypeOf(b).String()
 		return false, &error.TypeNotMatchError{st1, st2}

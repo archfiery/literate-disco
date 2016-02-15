@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func LessThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+func LessThan(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
@@ -18,7 +18,7 @@ func LessThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
 	return a.(int) < b.(int), nil
 }
 
-func MoreThan(a interface{}, b interface{}) (bool, *error.TypeNotMatchError) {
+func MoreThan(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
