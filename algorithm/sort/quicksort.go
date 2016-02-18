@@ -1,13 +1,22 @@
 package sort
 
 import (
-	"fmt"
 	"github.com/archfiery/literate-disco/container"
 	"github.com/archfiery/literate-disco/error"
 )
 
 func Quicksort(A []interface{}, f container.CompFunc) {
+	quicksort(A, 0, len(A)-1, f)
+}
 
+func quicksort(A []interface{}, p, r int, f container.CompFunc) {
+	if p < r {
+		q, err := quicksortPartition(A, p, r, f)
+		if err == nil {
+			quicksort(A, p, q-1, f)
+			quicksort(A, q+1, r, f)
+		}
+	}
 }
 
 func quicksortPartition(A []interface{}, p, r int, f container.CompFunc) (int, error.Error) {
@@ -18,7 +27,6 @@ func quicksortPartition(A []interface{}, p, r int, f container.CompFunc) (int, e
 			i++
 			A[i], A[j] = A[j], A[i]
 		}
-		fmt.Println(A)
 	}
 	A[i+1], A[r] = A[r], A[i+1]
 
