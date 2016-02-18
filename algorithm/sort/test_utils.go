@@ -1,6 +1,7 @@
 package sort
 
 import (
+	"github.com/archfiery/literate-disco/container"
 	"github.com/archfiery/literate-disco/error"
 	"reflect"
 )
@@ -43,4 +44,17 @@ func geq(a interface{}, b interface{}) (bool, error.Error) {
 		return false, &error.TypeNotMatchError{st1, st2}
 	}
 	return a.(int) >= b.(int), nil
+}
+
+func isSorted(A []interface{}, f container.CompFunc) bool {
+	if len(A) < 2 {
+		return true
+	}
+	for i := 0; i < len(A)-1; i++ {
+		val, err := f(A[i], A[i+1])
+		if err != nil || val == false {
+			return false
+		}
+	}
+	return true
 }

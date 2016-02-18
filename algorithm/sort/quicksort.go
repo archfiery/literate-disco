@@ -3,6 +3,8 @@ package sort
 import (
 	"github.com/archfiery/literate-disco/container"
 	"github.com/archfiery/literate-disco/error"
+	"math/rand"
+	"time"
 )
 
 func Quicksort(A []interface{}, f container.CompFunc) {
@@ -20,6 +22,11 @@ func quicksort(A []interface{}, p, r int, f container.CompFunc) {
 }
 
 func quicksortPartition(A []interface{}, p, r int, f container.CompFunc) (int, error.Error) {
+	// use random
+	rand.Seed(time.Now().UnixNano())
+	x := rand.Intn(r-p) + p
+	A[x], A[r] = A[r], A[x]
+	// start partitioning
 	i := p - 1
 	for j := p; j < r; j++ {
 		val, err := f(A[j], A[r])
