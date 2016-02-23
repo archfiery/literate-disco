@@ -27,7 +27,7 @@ func MoreThan(a interface{}, b interface{}) (bool, error.Error) {
 	return a.(int) > b.(int), nil
 }
 
-func leq(a interface{}, b interface{}) (bool, error.Error) {
+func Leq(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
@@ -37,7 +37,7 @@ func leq(a interface{}, b interface{}) (bool, error.Error) {
 	return a.(int) <= b.(int), nil
 }
 
-func geq(a interface{}, b interface{}) (bool, error.Error) {
+func Geq(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
@@ -46,7 +46,7 @@ func geq(a interface{}, b interface{}) (bool, error.Error) {
 	return a.(int) >= b.(int), nil
 }
 
-func isSorted(A []interface{}, f container.CompFunc) bool {
+func IsSorted(A []interface{}, f container.CompFunc) bool {
 	if len(A) < 2 {
 		return true
 	}

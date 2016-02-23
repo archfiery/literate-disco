@@ -3,6 +3,7 @@ package sort
 import (
 	"fmt"
 	"testing"
+	test_util "github.com/archfiery/literate-disco/test"
 )
 
 // Test Partitioning function for quicksort
@@ -16,7 +17,7 @@ func TestQuicksortPartition(t *testing.T) {
 		array[i] = v
 	}
 
-	_, err := quicksortPartition(array, 0, 4, leq)
+	_, err := quicksortPartition(array, 0, 4, test_util.Leq)
 	if err != nil {
 		t.Fatal("quick sort partition error")
 	}
@@ -33,14 +34,14 @@ func TestQuicksort(t *testing.T) {
 	for i, v := range dataSlice {
 		array[i] = v
 	}
-	Quicksort(array, leq)
+	Quicksort(array, test_util.Leq)
 	fmt.Println(array)
-	if isSorted(array, leq) == false {
+	if test_util.IsSorted(array, test_util.Leq) == false {
 		t.Fatal("not sorted with leq function")
 	}
-	Quicksort(array, geq)
+	Quicksort(array, test_util.Geq)
 	fmt.Println(array)
-	if isSorted(array, geq) == false {
+	if test_util.IsSorted(array, test_util.Geq) == false {
 		t.Fatal("not sorted with geq function")
 	}
 
