@@ -29,7 +29,6 @@ func MakeVector(comp container.CompFunc) Vector {
 // Capacity
 //==========
 
-
 // Returns true if the vector is empty, false otherwise
 func (v Vector) Empty() bool {
 	return (v.Size() == 0)
