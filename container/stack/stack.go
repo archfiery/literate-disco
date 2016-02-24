@@ -44,13 +44,13 @@ func (s Stack) Top() (interface{}, error.Error) {
 }
 
 // Inserts an element to the stack
-func (s Stack) Push(i interface{}) {
+func (s *Stack) Push(i interface{}) {
 	s.vec.PushBack(i)
 }
 
 // Remove the top element, reduces the size of stack by 1
 // Returns error if the stack is already empty
-func (s Stack) Pop() error.Error {
+func (s *Stack) Pop() error.Error {
 	if s.Size() == 0 {
 		return error.OutOfRangeError{}
 	}
