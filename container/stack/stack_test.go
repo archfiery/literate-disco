@@ -2,8 +2,8 @@ package stack
 
 import (
 	"fmt"
-	"testing"
 	"github.com/archfiery/literate-disco/test"
+	"testing"
 )
 
 func TestCreateStack(t *testing.T) {

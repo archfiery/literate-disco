@@ -45,7 +45,6 @@ func (v Vector) Capacity() int {
 	return cap(v.data)
 }
 
-
 //==========
 // Modifiers
 //==========
@@ -66,14 +65,14 @@ func (v *Vector) PushBack(a interface{}) {
 
 // Removes the last element in the vector
 func (v *Vector) PopBack() *error.OutOfRangeError {
-	if (v.Size() <= 0) {
+	if v.Size() <= 0 {
 		return new(error.OutOfRangeError)
 	}
 	// shrink the data array if necessary
 	if lessThanQuarter(v.data) && cap(v.data) > INIT_CAP {
 		v.data = halveSlice(&v.data)
 	}
-	v.data = v.data[:v.Size() - 1]
+	v.data = v.data[:v.Size()-1]
 	return nil
 }
 
@@ -83,7 +82,7 @@ func (v *Vector) Insert(index int, a interface{}) *error.OutOfRangeError {
 		v.data = doubleSlice(&v.data)
 	}
 	// when the index is invalid
-	if index > v.Size() || index < 0{
+	if index > v.Size() || index < 0 {
 		return new(error.OutOfRangeError)
 	}
 	// when the index is the last
@@ -161,7 +160,7 @@ func doubleSlice(A *[]interface{}) []interface{} {
 // Returns a new slice with half capacity of the original one
 // Copies the items from original slice to the new one
 func halveSlice(A *[]interface{}) []interface{} {
-	B := make([]interface{}, len(*A), cap(*A) / 2)
+	B := make([]interface{}, len(*A), cap(*A)/2)
 	copy(B, *A)
 	return B
 }

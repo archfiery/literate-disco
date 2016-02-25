@@ -54,8 +54,8 @@ func TestHalveSlice(t *testing.T) {
 	prevCap := 20
 	A := make([]interface{}, 0, prevCap)
 	B := halveSlice(&A)
-	if cap(B) != prevCap / 2 {
-		t.Fatal("cap are not doubled, expected ", prevCap / 2, ", but get ", cap(B))
+	if cap(B) != prevCap/2 {
+		t.Fatal("cap are not doubled, expected ", prevCap/2, ", but get ", cap(B))
 	}
 }
 
@@ -159,7 +159,7 @@ func TestPopBack(t *testing.T) {
 	if vec.Capacity() != 8192 {
 		t.Fatal("vector is expected to have capacity of 8192, but it has capacity of ", vec.Capacity())
 	}
-	if vec.Size() < vec.Capacity() / 4 {
+	if vec.Size() < vec.Capacity()/4 {
 		t.Fatal("capcity are not fairly bounded")
 	}
 }
