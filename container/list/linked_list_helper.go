@@ -1,6 +1,5 @@
 package list
 
-
 //===============
 // helper methods
 //===============
@@ -9,6 +8,7 @@ package list
 func (list *LinkedList) linkFirst(e interface{}) {
 	f := list.first
 	n := MakeNode(nil, e, f)
+	list.first = &n
 	if f == nil {
 		list.last = &n
 	} else {
@@ -21,6 +21,7 @@ func (list *LinkedList) linkFirst(e interface{}) {
 func (list *LinkedList) linkLast(e interface{}) {
 	l := list.last
 	n := MakeNode(l, e, nil)
+	list.last = &n
 	if l == nil {
 		list.first = &n
 	} else {
@@ -34,7 +35,8 @@ func (list *LinkedList) linkBefore(e interface{}, succ *Node) {
 	pred := succ.prev
 	n := MakeNode(pred, e, nil)
 	succ.prev = &n
-	if (pred == nil) {
+	n.next = succ
+	if pred == nil {
 		list.first = &n
 	} else {
 		pred.next = &n
@@ -113,3 +115,58 @@ func (list *LinkedList) unlink(n *Node) interface{} {
 	return e
 }
 
+// Returns the index of first occurred node containing the element
+// It counts the number of nodes being traversed from the first to the last
+// If element cannot be found, returns -1
+func (list LinkedList) indexOf(e interface{}) int {
+	if list.Size() == 0 {
+		return -1
+	}
+	index := 0
+	if e == nil {
+		for n := list.first; n != nil; {
+			if n.item == nil {
+				return index
+			}
+			index++
+			n = n.next
+		}
+	} else {
+		for n := list.first; n != nil; {
+			if val, err := list.equal(e, n.item); err == nil && val == true {
+				return index
+			}
+			index++
+			n = n.next
+		}
+	}
+	return -1
+}
+
+// Returns the index of last occurred node containing the element
+// It counts the number of nodes being traversed from the last to the first
+// If element cannot be found, return -1
+func (list LinkedList) lastIndexOf(e interface{}) int {
+	if list.Size() == 0 {
+		return -1
+	}
+	index := list.Size() - 1
+	if e == nil {
+		for n := list.last; n != nil; {
+			if n.item == nil {
+				return index
+			}
+			index--
+			n = n.prev
+		}
+	} else {
+		for n := list.last; n != nil; {
+			if val, err := list.equal(e, n.item); err == nil && val == true {
+				return index
+			}
+			index--
+			n = n.prev
+		}
+	}
+	return -1
+}

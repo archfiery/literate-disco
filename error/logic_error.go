@@ -6,8 +6,8 @@ import (
 
 // Index out of range error
 // It is usually thrown for a slice
-type OutOfRangeError struct{
-	msg string
+type OutOfRangeError struct {
+	Msg string
 }
 
 // Returns a string describing the error

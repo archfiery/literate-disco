@@ -1,6 +1,10 @@
 package list
 
-import "github.com/archfiery/literate-disco/error"
+import (
+	"fmt"
+	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/error"
+)
 
 // A Node struct that represents a node in the list
 type Node struct {
@@ -20,15 +24,16 @@ func MakeNode(next *Node, e interface{}, prev *Node) Node {
 // It also maintains the size of the list
 // The actual links are stored in the node
 type LinkedList struct {
-	size int
+	size  int
 	first *Node
 	last  *Node
+	equal container.EqualFunc
 }
 
 // Returns a newly made list
 // first and last nodes are nil by default
-func MakeList() LinkedList {
-	return LinkedList{0, nil, nil}
+func MakeList(f container.EqualFunc) LinkedList {
+	return LinkedList{0, nil, nil, f}
 }
 
 //==========
@@ -101,4 +106,45 @@ func (list *LinkedList) PushFront(e interface{}) {
 // Inserts an element at the end of the list
 func (list *LinkedList) PushBack(e interface{}) {
 	list.linkLast(e)
+}
+
+// Inserts an element to some position in the list
+// If the position is greater than the size, then OutOfRange error will be returned
+// If the position equals to the current size of list, then PushBack will be called
+func (list *LinkedList) Insert(e interface{}, pos int) error.Error {
+	if pos > list.Size() || pos < 0 {
+		str := fmt.Sprintf("size is %d while index is %d", list.Size(), pos)
+		return error.OutOfRangeError{str}
+	} else if pos == list.Size() {
+		list.PushBack(e)
+	} else if pos == 0 {
+		list.PushFront(e)
+	} else {
+		n := list.first
+		for i := 0; i < pos; i++ {
+			n = n.next
+		}
+		list.linkBefore(e, n)
+	}
+	return nil
+}
+
+func (list *LinkedList) Erase(pos int) error.Error {
+	if pos > list.Size()-1 || pos < 0 {
+		str := fmt.Sprintf("size is %d while index is %d", list.Size(), pos)
+		return error.OutOfRangeError{str}
+	} else if pos == list.Size()-1 {
+		l := list.last
+		list.unlinkLast(l)
+	} else if pos == 0 {
+		f := list.first
+		list.unlinkFirst(f)
+	} else {
+		n := list.first
+		for i := 0; i < pos; i++ {
+			n = n.next
+		}
+		list.unlink(n)
+	}
+	return nil
 }
