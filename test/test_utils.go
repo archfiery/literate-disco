@@ -27,6 +27,7 @@ func MoreThan(a interface{}, b interface{}) (bool, error.Error) {
 	return a.(int) > b.(int), nil
 }
 
+// Less than or equal to
 func Leq(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
@@ -37,6 +38,7 @@ func Leq(a interface{}, b interface{}) (bool, error.Error) {
 	return a.(int) <= b.(int), nil
 }
 
+// Greater than or equal to
 func Geq(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
@@ -46,6 +48,7 @@ func Geq(a interface{}, b interface{}) (bool, error.Error) {
 	return a.(int) >= b.(int), nil
 }
 
+// Returns true if the slice of interface{} is sorted based on the comparision function
 func IsSorted(A []interface{}, f container.CompFunc) bool {
 	if len(A) < 2 {
 		return true
@@ -57,4 +60,14 @@ func IsSorted(A []interface{}, f container.CompFunc) bool {
 		}
 	}
 	return true
+}
+
+// An int equal function
+func IntEqual (a interface{}, b interface{}) (bool, error.Error) {
+	if reflect.TypeOf(a) != reflect.TypeOf(b) {
+		st1 := reflect.TypeOf(a).String()
+		st2 := reflect.TypeOf(b).String()
+		return false, &error.TypeNotMatchError{st1, st2}
+	}
+	return a.(int) == b.(int), nil
 }

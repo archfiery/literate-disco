@@ -6,7 +6,9 @@ import (
 
 // Index out of range error
 // It is usually thrown for a slice
-type OutOfRangeError struct{}
+type OutOfRangeError struct {
+	Msg string
+}
 
 // Returns a string describing the error
 func (err OutOfRangeError) Error() string {
@@ -32,4 +34,14 @@ type AssertionError struct{}
 // Returns a string describing the error
 func (err AssertionError) Error() string {
 	return fmt.Sprintf("Assertion error")
+}
+
+// NoSuchElementError
+// It is usually thrown when trying to access some element that does not exist in the container
+// For example: access the first element from a linked list when the list is empty
+type NoSuchElementError struct{}
+
+// Returns a string describing the error
+func (err NoSuchElementError) Error() string {
+	return fmt.Sprintf("No Such Element error")
 }
