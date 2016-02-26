@@ -1,9 +1,13 @@
 ## Go Data Structure
 
-| branch\CI | Travis                                                                                                                              | AppVeyor                                                                                                                                                                       |
-|-----------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| master    | [![Build Status](https://travis-ci.org/archfiery/literate-disco.svg?branch=master)](https://travis-ci.org/archfiery/literate-disco) | [![Build status](https://ci.appveyor.com/api/projects/status/d3uwt30blphrof30/branch/master?svg=true)](https://ci.appveyor.com/project/archfiery/literate-disco/branch/master) |
-| dev       | [![Build Status](https://travis-ci.org/archfiery/literate-disco.svg?branch=dev)](https://travis-ci.org/archfiery/literate-disco)    | [![Build status](https://ci.appveyor.com/api/projects/status/d3uwt30blphrof30/branch/dev?svg=true)](https://ci.appveyor.com/project/archfiery/literate-disco/branch/dev)    |
+Documentation: [![GoDoc](https://godoc.org/github.com/archfiery/literate-disco?status.svg)](https://godoc.org/github.com/archfiery/literate-disco)
+
+CI:
+
+| branch \ CI | Travis                                                                                                                              | AppVeyor                                                                                                                                                                       |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| master      | [![Build Status](https://travis-ci.org/archfiery/literate-disco.svg?branch=master)](https://travis-ci.org/archfiery/literate-disco) | [![Build status](https://ci.appveyor.com/api/projects/status/d3uwt30blphrof30/branch/master?svg=true)](https://ci.appveyor.com/project/archfiery/literate-disco/branch/master) |
+
 
 A playground for implementing some data structures. 
 As I am a big fan of C++, I will reference the standard library.
