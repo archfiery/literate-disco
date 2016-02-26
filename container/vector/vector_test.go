@@ -3,6 +3,7 @@ package vector
 import (
 	"fmt"
 	"github.com/archfiery/literate-disco/error"
+	test_utils "github.com/archfiery/literate-disco/test"
 	"reflect"
 	"testing"
 )
@@ -210,4 +211,42 @@ func TestInsert(t *testing.T) {
 		t.Fatal("Size is incorrect")
 	}
 	fmt.Println(vec.data)
+}
+
+func TestReserve(t *testing.T) {
+	fmt.Println("TestReserve")
+	v := MakeVector(test_utils.Leq)
+	for i := 0; i < 1000; i++ {
+		v.PushBack(i)
+	}
+	if v.Capacity() != 2048 {
+		t.Fatal("Only 1 doubled rellocation should be happened")
+	}
+	v.Reserve(1000)
+	if v.Capacity() != 2048 {
+		t.Fatal("Nothing should happen because requested 1000 is smaller than 2048")
+	}
+	v.Reserve(4096)
+	if v.Capacity() != 4096 {
+		t.Fatal("Reserve does not work")
+	}
+}
+
+func TestShrinkToFit(t *testing.T) {
+	fmt.Println("TestShrinkToFit")
+	v := MakeVector(test_utils.Leq)
+	for i := 0; i < 1000; i++ {
+		v.PushBack(i)
+	}
+	if v.Capacity() != 2048 {
+		t.Fatal("Only 1 doubled rellocation should be happened")
+	}
+	v.Reserve(4096)
+	if v.Capacity() != 4096 {
+		t.Fatal("Reserve does not work")
+	}
+	v.ShrinkToFit()
+	if v.Capacity() != 1000 {
+		t.Fatal("ShrinkToFit does not work")
+	}
 }
