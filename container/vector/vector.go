@@ -1,3 +1,4 @@
+// Package vector implements vector data structure
 package vector
 
 import (

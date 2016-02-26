@@ -1,3 +1,4 @@
+// Package stack implements stack data structure
 package stack
 
 import (

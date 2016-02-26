@@ -1,3 +1,4 @@
+// Package list implements linked list data structure
 package list
 
 import (

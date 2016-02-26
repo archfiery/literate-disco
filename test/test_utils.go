@@ -1,4 +1,5 @@
-package sort
+// Package test provides commonly used functions for running test cases
+package test
 
 import (
 	"github.com/archfiery/literate-disco/container"
