@@ -3,6 +3,7 @@ package sort
 import (
 	"fmt"
 	"testing"
+	test_util "github.com/archfiery/literate-disco/test"
 )
 
 func TestBinaryInsertionSort(t *testing.T) {
@@ -13,10 +14,10 @@ func TestBinaryInsertionSort(t *testing.T) {
 		array[i] = v
 	}
 
-	BinaryInsertionSort(array, len(array), LessThan)
+	BinaryInsertionSort(array, len(array), test_util.LessThan)
 
 	for i := 0; i < len(array)-1; i++ {
-		if v, err := LessThan(array[i], array[i+1]); err == nil && v == false {
+		if v, err := test_util.LessThan(array[i], array[i+1]); err == nil && v == false {
 			t.Fatal("Array fails to sort in ascending order")
 		}
 	}
@@ -25,10 +26,10 @@ func TestBinaryInsertionSort(t *testing.T) {
 		array[i] = v
 	}
 
-	BinaryInsertionSort(array, len(array), MoreThan)
+	BinaryInsertionSort(array, len(array), test_util.MoreThan)
 
 	for i := 0; i < len(array)-1; i++ {
-		if v, err := MoreThan(array[i], array[i+1]); err == nil && v == false {
+		if v, err := test_util.MoreThan(array[i], array[i+1]); err == nil && v == false {
 			t.Fatal("Array fails to sort in descending order")
 		}
 	}

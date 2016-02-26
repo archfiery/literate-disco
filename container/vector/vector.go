@@ -1,3 +1,4 @@
+// Package vector implements vector data structure
 package vector
 
 import (
@@ -29,7 +30,6 @@ func MakeVector(comp container.CompFunc) Vector {
 // Capacity
 //==========
 
-
 // Returns true if the vector is empty, false otherwise
 func (v Vector) Empty() bool {
 	return (v.Size() == 0)
@@ -46,6 +46,22 @@ func (v Vector) Capacity() int {
 	return cap(v.data)
 }
 
+// Reserves the capacity for containing n elements
+// If n is greater than the current capacity, rellocate the memory
+// Otherwise the capacity remains the same
+// Items are not altered in either way
+func (v *Vector) Reserve(n int) {
+	if n > v.Capacity() {
+		v.data = alterCapacity(&v.data, n)
+	}
+}
+
+// Reduces the capacity for the vector to be its exact size
+// It does not alter the vector size or its elements
+func (v *Vector) ShrinkToFit() {
+	n := v.Size()
+	v.data = alterCapacity(&v.data, n)
+}
 
 //==========
 // Modifiers
@@ -58,6 +74,7 @@ func (v *Vector) Clear() {
 
 // Adds a new element at the end of the vector
 func (v *Vector) PushBack(a interface{}) {
+	// double the data array if necessary
 	if moreThanHalf(v.data) {
 		v.data = doubleSlice(&v.data)
 	}
@@ -66,10 +83,14 @@ func (v *Vector) PushBack(a interface{}) {
 
 // Removes the last element in the vector
 func (v *Vector) PopBack() *error.OutOfRangeError {
-	if (v.Size() <= 0) {
+	if v.Size() <= 0 {
 		return new(error.OutOfRangeError)
 	}
-	v.data = v.data[:v.Size() - 1]
+	// shrink the data array if necessary
+	if lessThanQuarter(v.data) && cap(v.data) > INIT_CAP {
+		v.data = halveSlice(&v.data)
+	}
+	v.data = v.data[:v.Size()-1]
 	return nil
 }
 
@@ -79,7 +100,7 @@ func (v *Vector) Insert(index int, a interface{}) *error.OutOfRangeError {
 		v.data = doubleSlice(&v.data)
 	}
 	// when the index is invalid
-	if index > v.Size() || index < 0{
+	if index > v.Size() || index < 0 {
 		return new(error.OutOfRangeError)
 	}
 	// when the index is the last
@@ -130,7 +151,7 @@ func (v Vector) At(i int) (interface{}, *error.OutOfRangeError) {
 //helper functions
 //================
 
-// Returns true if the len(data) >= cap(data)
+// Returns true if len(data) >= cap(data) / 2
 func moreThanHalf(A []interface{}) bool {
 	if len(A) < cap(A)/2 {
 		return false
@@ -138,10 +159,30 @@ func moreThanHalf(A []interface{}) bool {
 	return true
 }
 
+// Returns true if len(data) < cap(data) / 4
+func lessThanQuarter(A []interface{}) bool {
+	if len(A) < cap(A)/4 {
+		return true
+	}
+	return false
+}
+
 // Returns a new slice with doubled capacity of the original one
-// Copies the item from original slice to the new one
+// Copies the items from original slice to the new one
 func doubleSlice(A *[]interface{}) []interface{} {
-	B := make([]interface{}, len(*A), 2*cap(*A))
+	return alterCapacity(A, cap(*A)*2)
+}
+
+// Returns a new slice with half capacity of the original one
+// Copies the items from original slice to the new one
+func halveSlice(A *[]interface{}) []interface{} {
+	return alterCapacity(A, cap(*A)/2)
+}
+
+// Returns a new slice with size n
+// Copies the items from original slice to the new one
+func alterCapacity(A *[]interface{}, n int) []interface{} {
+	B := make([]interface{}, len(*A), n)
 	copy(B, *A)
 	return B
 }

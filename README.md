@@ -1,12 +1,20 @@
 ## Go Data Structure
 
-[![Build Status](https://travis-ci.org/archfiery/literate-disco.svg?branch=master)](https://travis-ci.org/archfiery/literate-disco)
+Documentation: [![GoDoc](https://godoc.org/github.com/archfiery/literate-disco?status.svg)](https://godoc.org/github.com/archfiery/literate-disco)
+
+CI:
+
+| branch \ CI | Travis                                                                                                                              | AppVeyor                                                                                                                                                                       |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| master      | [![Build Status](https://travis-ci.org/archfiery/literate-disco.svg?branch=master)](https://travis-ci.org/archfiery/literate-disco) | [![Build status](https://ci.appveyor.com/api/projects/status/d3uwt30blphrof30/branch/master?svg=true)](https://ci.appveyor.com/project/archfiery/literate-disco/branch/master) |
+
 
 A playground for implementing some data structures. 
 As I am a big fan of C++, I will reference the standard library.
 In the introduction of [Effective Go](https://golang.org/doc/effective_go.html),
 we can see that it is a bad idea to translate everything directly from C++ to Go.
 However, it is still interesting to explore a bit further -- why not?
+Also I notice that the OpenJDK is well written and maintained -- it looks like some model assignment!
 
 Beside the data structure, I am also interested to place some additional implementation
 into this repository.

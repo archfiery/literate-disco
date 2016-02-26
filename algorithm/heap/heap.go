@@ -1,3 +1,4 @@
+// Package heap implements the heap data structure
 package heap
 
 import (
