@@ -1,10 +1,10 @@
 package sort
 
 import (
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 )
 
-func BinaryInsertionSort(A []interface{}, n int, f container.CompFunc) {
+func BinaryInsertionSort(A []interface{}, n int, f common.CompFunc) {
 	for i := 1; i < n; i++ {
 		lo, hi := 0, i
 		m := i / 2
@@ -38,7 +38,7 @@ func BinaryInsertionSort(A []interface{}, n int, f container.CompFunc) {
 	}
 }
 
-func binarySearch(A []interface{}, lo int, hi int, key interface{}, f container.CompFunc) int {
+func binarySearch(A []interface{}, lo int, hi int, key interface{}, f common.CompFunc) int {
 	if lo == hi {
 		return lo
 	}

@@ -2,7 +2,7 @@
 package stack
 
 import (
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/container/vector"
 	"github.com/archfiery/literate-disco/error"
 )
@@ -11,11 +11,11 @@ import (
 // It uses Adapter pattern that wraps up the vector
 type Stack struct {
 	vec  vector.Vector
-	comp container.CompFunc
+	comp common.CompFunc
 }
 
 // Returns a new stack with a default vector
-func MakeStack(comp container.CompFunc) Stack {
+func MakeStack(comp common.CompFunc) Stack {
 	v := vector.MakeVector(comp)
 	s := Stack{v, comp}
 	return s

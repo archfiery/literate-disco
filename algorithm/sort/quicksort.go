@@ -1,17 +1,17 @@
 package sort
 
 import (
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/error"
 	"math/rand"
 	"time"
 )
 
-func Quicksort(A []interface{}, f container.CompFunc) {
+func Quicksort(A []interface{}, f common.CompFunc) {
 	quicksort(A, 0, len(A)-1, f)
 }
 
-func quicksort(A []interface{}, p, r int, f container.CompFunc) {
+func quicksort(A []interface{}, p, r int, f common.CompFunc) {
 	if p < r {
 		q, err := quicksortPartition(A, p, r, f)
 		if err == nil {
@@ -21,7 +21,7 @@ func quicksort(A []interface{}, p, r int, f container.CompFunc) {
 	}
 }
 
-func quicksortPartition(A []interface{}, p, r int, f container.CompFunc) (int, error.Error) {
+func quicksortPartition(A []interface{}, p, r int, f common.CompFunc) (int, error.Error) {
 	// use random
 	rand.Seed(time.Now().UnixNano())
 	x := rand.Intn(r-p) + p

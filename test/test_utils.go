@@ -2,7 +2,7 @@
 package test
 
 import (
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/error"
 	"reflect"
 )
@@ -50,7 +50,7 @@ func Geq(a interface{}, b interface{}) (bool, error.Error) {
 }
 
 // Returns true if the slice of interface{} is sorted based on the comparision function
-func IsSorted(A []interface{}, f container.CompFunc) bool {
+func IsSorted(A []interface{}, f common.CompFunc) bool {
 	if len(A) < 2 {
 		return true
 	}

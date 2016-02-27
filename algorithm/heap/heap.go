@@ -2,7 +2,7 @@
 package heap
 
 import (
-	"github.com/archfiery/literate-disco/container"
+	c "github.com/archfiery/literate-disco/common"
 )
 
 // A default Heap struct
@@ -10,11 +10,11 @@ import (
 // A comparison function must be supplied for swapping condition
 type Heap struct {
 	data []interface{}
-	comp container.CompFunc
+	comp c.CompFunc
 }
 
 // Returns a new binary heap by a given data and comparison function
-func MakeHeap(data []interface{}, comp container.CompFunc) Heap {
+func MakeHeap(data []interface{}, comp c.CompFunc) Heap {
 	return Heap{data, comp}
 }
 
@@ -86,7 +86,7 @@ func parent(i int) int {
 }
 
 // Runs heapify function on all items for an array
-func heapifyAll(A []interface{}, f container.CompFunc) {
+func heapifyAll(A []interface{}, f c.CompFunc) {
 	size := len(A)
 	for i := size / 2; i >= 0; i-- {
 		heapify(A, i, f)
@@ -95,7 +95,7 @@ func heapifyAll(A []interface{}, f container.CompFunc) {
 
 // Recursively runs the heapify operation in order to maintain the heap property
 // at the subtree of rooted at i
-func heapify(A []interface{}, i int, f container.CompFunc) {
+func heapify(A []interface{}, i int, f c.CompFunc) {
 	l := left(i)
 	r := right(i)
 	need := i

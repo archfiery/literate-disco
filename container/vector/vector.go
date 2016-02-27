@@ -2,7 +2,7 @@
 package vector
 
 import (
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/error"
 )
 
@@ -16,11 +16,11 @@ const (
 // It also needs a comparison function that throws TypeNotMatch error
 type Vector struct {
 	data []interface{}
-	comp container.CompFunc
+	comp common.CompFunc
 }
 
 // Returns a new vector with initialised capacity
-func MakeVector(comp container.CompFunc) Vector {
+func MakeVector(comp common.CompFunc) Vector {
 	slice := make([]interface{}, 0, INIT_CAP)
 	v := Vector{slice, comp}
 	return v
