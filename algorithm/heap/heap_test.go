@@ -2,7 +2,7 @@ package heap
 
 import (
 	"fmt"
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/error"
 	"reflect"
 	"testing"
@@ -126,7 +126,7 @@ func TestBasicOps(t *testing.T) {
 }
 
 // Return true if slice A is sorted according to comparison function f
-func IsSorted(A []interface{}, f container.CompFunc) bool {
+func IsSorted(A []interface{}, f common.CompFunc) bool {
 	for i := 0; i < len(A)-1; i++ {
 		val, err := f(A[i+1], A[i])
 		if err == nil && val != true {

@@ -3,7 +3,7 @@ package list
 
 import (
 	"fmt"
-	"github.com/archfiery/literate-disco/container"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/error"
 )
 
@@ -28,12 +28,12 @@ type LinkedList struct {
 	size  int
 	first *Node
 	last  *Node
-	equal container.EqualFunc
+	equal common.EqualFunc
 }
 
 // Returns a newly made list
 // first and last nodes are nil by default
-func MakeList(f container.EqualFunc) LinkedList {
+func MakeList(f common.EqualFunc) LinkedList {
 	return LinkedList{0, nil, nil, f}
 }
 

@@ -1,4 +1,5 @@
-package container
+// Package common provides several function types that are commonly used
+package common
 
 import "github.com/archfiery/literate-disco/error"
 
