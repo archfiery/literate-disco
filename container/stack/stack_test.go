@@ -2,13 +2,13 @@ package stack
 
 import (
 	"fmt"
-	test_util "github.com/archfiery/literate-disco/test"
+	"github.com/archfiery/literate-disco/test"
 	"testing"
 )
 
 func TestCreateStack(t *testing.T) {
-	fmt.Println("TestCreateStack")
-	s := MakeStack(test_util.LessThan)
+	fmt.Println("\nTestCreateStack")
+	s := MakeStack(test.LessThan)
 	if s.Size() != 0 {
 		t.Fatal("The size of stack is not 0")
 	}
@@ -16,7 +16,7 @@ func TestCreateStack(t *testing.T) {
 
 func TestPush(t *testing.T) {
 	fmt.Println("TestPush")
-	s := MakeStack(test_util.LessThan)
+	s := MakeStack(test.LessThan)
 	s.Push(1)
 	s.Push(2)
 	if s.Size() != 2 {
@@ -26,7 +26,7 @@ func TestPush(t *testing.T) {
 
 func TestPop(t *testing.T) {
 	fmt.Println("TestPop")
-	s := MakeStack(test_util.LessThan)
+	s := MakeStack(test.LessThan)
 	s.Push(1)
 	s.Pop()
 	if s.Size() != 0 {
@@ -44,7 +44,7 @@ func TestPop(t *testing.T) {
 
 func TestTop(t *testing.T) {
 	fmt.Println("TestTop")
-	s := MakeStack(test_util.LessThan)
+	s := MakeStack(test.LessThan)
 	s.Push(1)
 	s.Push(2)
 	val, err := s.Top()

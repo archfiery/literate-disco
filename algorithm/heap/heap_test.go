@@ -3,33 +3,13 @@ package heap
 import (
 	"fmt"
 	"github.com/archfiery/literate-disco/common"
-	"github.com/archfiery/literate-disco/error"
-	"reflect"
+	"github.com/archfiery/literate-disco/test"
 	"testing"
 )
 
-func LessThan(a interface{}, b interface{}) (bool, error.Error) {
-	if reflect.TypeOf(a) != reflect.TypeOf(b) {
-		st1 := reflect.TypeOf(a).String()
-		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
-
-	}
-	return a.(int) < b.(int), nil
-}
-
-func MoreThan(a interface{}, b interface{}) (bool, error.Error) {
-	if reflect.TypeOf(a) != reflect.TypeOf(b) {
-		st1 := reflect.TypeOf(a).String()
-		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
-	}
-	return a.(int) > b.(int), nil
-}
-
 // Test heapify() function in heap.go
 func TestHeapify(t *testing.T) {
-	fmt.Println("TestHeapify")
+	fmt.Println("\nTestHeapify")
 	// make dummy data
 	dataSlice := []int{3, 1, 2}
 	array := make([]interface{}, len(dataSlice))
@@ -37,7 +17,7 @@ func TestHeapify(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := MakeHeap(array, LessThan)
+	heap := MakeHeap(array, test.LessThan)
 	// verify heap size
 	if heap.Size() != 3 {
 		t.Fatal("The size does not match")
@@ -80,7 +60,7 @@ func TestBuildHeap(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := MakeHeap(array, LessThan)
+	heap := MakeHeap(array, test.LessThan)
 	heap.BuildHeap()
 
 	// expected answer for test array
@@ -105,7 +85,7 @@ func TestBasicOps(t *testing.T) {
 		array[i] = v
 	}
 	// make heap
-	heap := MakeHeap(array, LessThan)
+	heap := MakeHeap(array, test.LessThan)
 	heap.BuildHeap()
 	// test Size()
 	if heap.Size() != 5 {
@@ -146,14 +126,14 @@ func TestHeapSort(t *testing.T) {
 		array[i] = v
 	}
 	// make max heap
-	heap := Heap{array, MoreThan}
+	heap := Heap{array, test.MoreThan}
 	heap.HeapSort()
 	if IsSorted(heap.data, heap.comp) == false {
 		fmt.Println(heap.data)
 		t.Fatal("The data array is not sorted as expected")
 	}
 
-	heap = Heap{array, LessThan}
+	heap = Heap{array, test.LessThan}
 	heap.HeapSort()
 	if IsSorted(heap.data, heap.comp) == false {
 		fmt.Println(heap.data)

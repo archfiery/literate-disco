@@ -2,13 +2,13 @@ package list
 
 import (
 	"fmt"
-	test_utils "github.com/archfiery/literate-disco/test"
+	"github.com/archfiery/literate-disco/test"
 	"testing"
 )
 
 // A simple test that tests node creation
 func TestCreateNode(t *testing.T) {
-	fmt.Println("TestCreateNode LinkedList")
+	fmt.Println("\nTestCreateNode LinkedList")
 	n1 := MakeNode(nil, 1, nil)
 	if n1.next != nil || n1.prev != nil {
 		t.Fatal("Links on the node is incorrect")
@@ -18,7 +18,7 @@ func TestCreateNode(t *testing.T) {
 // A simple test that contains `weak test cases` for the linked list
 func TestSimpleLinkedList(t *testing.T) {
 	fmt.Println("TestCreateLinkedList LinkedList")
-	l := MakeList(test_utils.IntEqual)
+	l := MakeList(test.IntEqual)
 	// push 1 to back, 1
 	l.PushBack(1)
 	if val, err := l.Front(); err == nil && val != 1 {
@@ -55,7 +55,7 @@ func TestSimpleLinkedList(t *testing.T) {
 // Test the indexOf helper method
 func TestIndexOf(t *testing.T) {
 	fmt.Println("TestIndexOf")
-	l := MakeList(test_utils.IntEqual)
+	l := MakeList(test.IntEqual)
 	// push 1 to back 1
 	l.PushBack(1)
 	// push 2 to back 1 <-> 2
@@ -83,7 +83,7 @@ func TestIndexOf(t *testing.T) {
 // Test the lastIndexOf helper method
 func TestLastIndexOf(t *testing.T) {
 	fmt.Println("TestLastIndexOf")
-	l := MakeList(test_utils.IntEqual)
+	l := MakeList(test.IntEqual)
 	// push 1 to back 1
 	l.PushBack(1)
 	// push 2 to back 1 <-> 2
@@ -110,7 +110,7 @@ func TestLastIndexOf(t *testing.T) {
 // Test Insert method
 func TestInsert(t *testing.T) {
 	fmt.Println("TestInsert")
-	l := MakeList(test_utils.IntEqual)
+	l := MakeList(test.IntEqual)
 	if err := l.Insert(1, 15); err == nil {
 		t.Fatal("An OutOfRangeError should be occured")
 	}
@@ -156,7 +156,7 @@ func TestInsert(t *testing.T) {
 // Test Erase method
 func TestErase(t *testing.T) {
 	fmt.Println("TestErase")
-	l := MakeList(test_utils.IntEqual)
+	l := MakeList(test.IntEqual)
 	err := l.Erase(0)
 	if err == nil {
 		fmt.Println("OutOfRangeError is expected to occur")
