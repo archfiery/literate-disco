@@ -64,7 +64,7 @@ func IsSorted(A []interface{}, f common.CompFunc) bool {
 }
 
 // An int equal function
-func IntEqual (a interface{}, b interface{}) (bool, error.Error) {
+func IntEqual(a interface{}, b interface{}) (bool, error.Error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()

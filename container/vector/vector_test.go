@@ -3,14 +3,14 @@ package vector
 import (
 	"fmt"
 	"github.com/archfiery/literate-disco/error"
-	test_utils "github.com/archfiery/literate-disco/test"
+	"github.com/archfiery/literate-disco/test"
 	"reflect"
 	"testing"
 )
 
 // Test moreThanHalf() function in vector.go
 func TestMoreThanHalf(t *testing.T) {
-	fmt.Println("TestMoreThanHalf")
+	fmt.Println("\nTestMoreThanHalf")
 	A := make([]interface{}, 0, 4)
 	if moreThanHalf(A) != false {
 		t.Fatal("len(A) is ", len(A), " and cap(A) is ", cap(A))
@@ -215,7 +215,7 @@ func TestInsert(t *testing.T) {
 
 func TestReserve(t *testing.T) {
 	fmt.Println("TestReserve")
-	v := MakeVector(test_utils.Leq)
+	v := MakeVector(test.Leq)
 	for i := 0; i < 1000; i++ {
 		v.PushBack(i)
 	}
@@ -234,7 +234,7 @@ func TestReserve(t *testing.T) {
 
 func TestShrinkToFit(t *testing.T) {
 	fmt.Println("TestShrinkToFit")
-	v := MakeVector(test_utils.Leq)
+	v := MakeVector(test.Leq)
 	for i := 0; i < 1000; i++ {
 		v.PushBack(i)
 	}
