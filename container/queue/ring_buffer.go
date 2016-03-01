@@ -1,7 +1,7 @@
 package queue
 
 import (
-	"github.com/archfiery/literate-disco/error"
+	"github.com/archfiery/literate-disco/common"
 	"runtime"
 	"sync/atomic"
 )
@@ -55,13 +55,13 @@ func roundUp(v uint64) uint64 {
 // MakeRingBuffer returns an initialized RingBuffer
 // Supplied size will be rounded up the nearest power of 2
 // If the size is not satisfied, an AssertionError will be returned
-func MakeRingBuffer(buffer_size uint64) (*RingBuffer, error.Error) {
+func MakeRingBuffer(buffer_size uint64) (*RingBuffer, error) {
 	buffer_size = roundUp(buffer_size)
 	rb := RingBuffer{}
 	// assert the buffer_size is 2 ^ x
 	if buffer_size >= 2 && buffer_size&(buffer_size-1) == 0 {
 	} else {
-		return &rb, error.AssertionError{}
+		return &rb, common.AssertionError{}
 	}
 
 	rb.buffer_ = make(buffer, buffer_size)

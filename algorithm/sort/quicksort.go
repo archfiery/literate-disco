@@ -2,7 +2,6 @@ package sort
 
 import (
 	"github.com/archfiery/literate-disco/common"
-	"github.com/archfiery/literate-disco/error"
 	"math/rand"
 	"time"
 )
@@ -21,7 +20,7 @@ func quicksort(A []interface{}, p, r int, f common.CompFunc) {
 	}
 }
 
-func quicksortPartition(A []interface{}, p, r int, f common.CompFunc) (int, error.Error) {
+func quicksortPartition(A []interface{}, p, r int, f common.CompFunc) (int, error) {
 	// use random
 	rand.Seed(time.Now().UnixNano())
 	x := rand.Intn(r-p) + p

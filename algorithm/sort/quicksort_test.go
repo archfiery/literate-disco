@@ -2,7 +2,7 @@ package sort
 
 import (
 	"fmt"
-	test "github.com/archfiery/literate-disco/test"
+	"github.com/archfiery/literate-disco/test"
 	"testing"
 )
 

@@ -3,48 +3,47 @@ package test
 
 import (
 	"github.com/archfiery/literate-disco/common"
-	"github.com/archfiery/literate-disco/error"
 	"reflect"
 )
 
 // Test int data only
-func LessThan(a interface{}, b interface{}) (bool, error.Error) {
+func LessThan(a interface{}, b interface{}) (bool, error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
+		return false, common.TypeNotMatchError{st1, st2}
 
 	}
 	return a.(int) < b.(int), nil
 }
 
 // Test int data only
-func MoreThan(a interface{}, b interface{}) (bool, error.Error) {
+func MoreThan(a interface{}, b interface{}) (bool, error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
+		return false, common.TypeNotMatchError{st1, st2}
 	}
 	return a.(int) > b.(int), nil
 }
 
 // Less than or equal to
-func Leq(a interface{}, b interface{}) (bool, error.Error) {
+func Leq(a interface{}, b interface{}) (bool, error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
+		return false, common.TypeNotMatchError{st1, st2}
 
 	}
 	return a.(int) <= b.(int), nil
 }
 
 // Greater than or equal to
-func Geq(a interface{}, b interface{}) (bool, error.Error) {
+func Geq(a interface{}, b interface{}) (bool, error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
+		return false, common.TypeNotMatchError{st1, st2}
 	}
 	return a.(int) >= b.(int), nil
 }
@@ -64,11 +63,11 @@ func IsSorted(A []interface{}, f common.CompFunc) bool {
 }
 
 // An int equal function
-func IntEqual(a interface{}, b interface{}) (bool, error.Error) {
+func IntEqual(a interface{}, b interface{}) (bool, error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1 := reflect.TypeOf(a).String()
 		st2 := reflect.TypeOf(b).String()
-		return false, &error.TypeNotMatchError{st1, st2}
+		return false, common.TypeNotMatchError{st1, st2}
 	}
 	return a.(int) == b.(int), nil
 }

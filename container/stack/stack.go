@@ -4,7 +4,6 @@ package stack
 import (
 	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/container/vector"
-	"github.com/archfiery/literate-disco/error"
 )
 
 // Type stack, using a vector as underlying data structure
@@ -33,9 +32,9 @@ func (s Stack) Size() int {
 
 // Returns the top element
 // Returns OutOfRangeError if the stack is already empty
-func (s Stack) Top() (interface{}, error.Error) {
+func (s Stack) Top() (interface{}, error) {
 	if s.Size() == 0 {
-		return -1, error.OutOfRangeError{}
+		return -1, common.OutOfRangeError{}
 	}
 	val, err := s.vec.Back()
 	if err != nil {
@@ -50,10 +49,10 @@ func (s *Stack) Push(i interface{}) {
 }
 
 // Remove the top element, reduces the size of stack by 1
-// Returns error if the stack is already empty
-func (s *Stack) Pop() error.Error {
+// Returns common.if the stack is already empty
+func (s *Stack) Pop() error {
 	if s.Size() == 0 {
-		return error.OutOfRangeError{}
+		return common.OutOfRangeError{}
 	}
 	s.vec.PopBack()
 	return nil
