@@ -125,7 +125,7 @@ func (v *Vector) Insert(index int, a interface{}) error {
 // Returns the first element in the vector
 func (v Vector) Front() (interface{}, error) {
 	if v.Size() <= 0 {
-		return 0, common.OutOfRangeError{}
+		return -1, common.OutOfRangeError{}
 	}
 	return v.data[0], nil
 }
@@ -133,7 +133,7 @@ func (v Vector) Front() (interface{}, error) {
 // Returns the last element in the vector
 func (v Vector) Back() (interface{}, error) {
 	if v.Size() <= 0 {
-		return 0, common.OutOfRangeError{}
+		return -1, common.OutOfRangeError{}
 	}
 	return v.data[v.Size()-1], nil
 }
@@ -141,7 +141,7 @@ func (v Vector) Back() (interface{}, error) {
 // Returns the item at index
 func (v Vector) At(i int) (interface{}, error) {
 	if i < 0 || i > v.Size()-1 {
-		return 0, common.OutOfRangeError{}
+		return -1, common.OutOfRangeError{}
 	}
 	return v.data[i], nil
 }

@@ -26,8 +26,12 @@ type buffer []*ring_cell
 // Type RingBuffer represents a ring buffer data structure.
 // It has 2 primary operations, `enqueue` and `dequeue`.
 // Each `enqueue` and `dequeue` takes 1 CAS per operation.
-// The original implementation is from http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
-// Some additional ones are learnt from https://github.com/Workiva/go-datastructures/blob/master/queue/ring.go
+//
+// The original implementation is from
+// http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
+//
+// Some additional ones are learnt from
+// https://github.com/Workiva/go-datastructures/blob/master/queue/ring.go
 type RingBuffer struct {
 	pad0_        cacheline_pad
 	buffer_      buffer
@@ -55,13 +59,13 @@ func roundUp(v uint64) uint64 {
 // MakeRingBuffer returns an initialized RingBuffer
 // Supplied size will be rounded up the nearest power of 2
 // If the size is not satisfied, an AssertionError will be returned
-func MakeRingBuffer(buffer_size uint64) (*RingBuffer, error) {
+func MakeRingBuffer(buffer_size uint64) (RingBuffer, error) {
 	buffer_size = roundUp(buffer_size)
 	rb := RingBuffer{}
 	// assert the buffer_size is 2 ^ x
 	if buffer_size >= 2 && buffer_size&(buffer_size-1) == 0 {
 	} else {
-		return &rb, common.AssertionError{}
+		return rb, common.AssertionError{}
 	}
 
 	rb.buffer_ = make(buffer, buffer_size)
@@ -73,7 +77,7 @@ func MakeRingBuffer(buffer_size uint64) (*RingBuffer, error) {
 	atomic.StoreUint64(&rb.enqueue_pos_, 0)
 	atomic.StoreUint64(&rb.dequeue_pos_, 0)
 
-	return &rb, nil
+	return rb, nil
 }
 
 // Enqueue adds a new element to the tail of the ring buffer

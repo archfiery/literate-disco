@@ -74,7 +74,7 @@ func BenchmarkSinglePCRingBuffer(b *testing.B) {
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		for i := 0; i < b.N ; i++ {
+		for i := 0; i < b.N; i++ {
 			rb.Enqueue(i)
 		}
 	}()
@@ -94,7 +94,7 @@ func BenchmarkBenchGet(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		rb, _ := MakeRingBuffer(2)
-		rbs = append(rbs, rb)
+		rbs = append(rbs, &rb)
 	}
 
 	b.ResetTimer()
