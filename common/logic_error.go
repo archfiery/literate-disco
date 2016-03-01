@@ -1,4 +1,5 @@
-package error
+// Package error provides error type
+package common
 
 import (
 	"fmt"

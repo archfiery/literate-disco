@@ -2,7 +2,7 @@ package vector
 
 import (
 	"fmt"
-	"github.com/archfiery/literate-disco/error"
+	"github.com/archfiery/literate-disco/common"
 	"github.com/archfiery/literate-disco/test"
 	"reflect"
 	"testing"
@@ -62,10 +62,10 @@ func TestHalveSlice(t *testing.T) {
 
 // A lessThan function with type matching
 // It throws TypeNotMatch error when a and b are not of the same type
-func lessThanVectorTest(a interface{}, b interface{}) (bool, error.Error) {
+func lessThanVectorTest(a interface{}, b interface{}) (bool, error) {
 	if reflect.TypeOf(a) != reflect.TypeOf(b) {
 		st1, st2 := reflect.TypeOf(a).String(), reflect.TypeOf(b).String()
-		return false, error.TypeNotMatchError{st1, st2}
+		return false, common.TypeNotMatchError{st1, st2}
 	}
 	switch a := a.(type) {
 	case int:

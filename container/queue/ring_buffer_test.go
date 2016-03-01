@@ -2,7 +2,6 @@ package queue
 
 import (
 	"fmt"
-	"math"
 	"sync"
 	"testing"
 )
@@ -68,26 +67,52 @@ func TestRingBufferEnqueueDequeue(t *testing.T) {
 // Benchmark
 //==============
 
-func BenchmarkSinglePRRingBuffer(b *testing.B) {
+func BenchmarkSinglePCRingBuffer(b *testing.B) {
 	rb, _ := MakeRingBuffer(1024)
-	var p float64
-	p = 20
-	var i uint64
-
 	var wg sync.WaitGroup
 
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		for i = 0; i < uint64(math.Exp2(p)); i++ {
+		for i := 0; i < b.N; i++ {
 			rb.Enqueue(i)
 		}
 	}()
 
 	go func() {
 		defer wg.Done()
-		for i = 0; i < uint64(math.Exp2(p)); i++ {
+		for i := 0; i < b.N; i++ {
 			rb.Dequeue()
+		}
+	}()
+
+	wg.Wait()
+}
+
+func BenchmarkBenchGet(b *testing.B) {
+	rbs := make([]*RingBuffer, 0, b.N)
+
+	for i := 0; i < b.N; i++ {
+		rb, _ := MakeRingBuffer(2)
+		rbs = append(rbs, &rb)
+	}
+
+	b.ResetTimer()
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
+		for i := 0; i < b.N; i++ {
+			rbs[i].Enqueue(1)
+		}
+	}()
+
+	go func() {
+		defer wg.Done()
+		for i := 0; i < b.N; i++ {
+			rbs[i].Dequeue()
 		}
 	}()
 

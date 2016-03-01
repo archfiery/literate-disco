@@ -4,7 +4,6 @@ package list
 import (
 	"fmt"
 	"github.com/archfiery/literate-disco/common"
-	"github.com/archfiery/literate-disco/error"
 )
 
 // A Node struct that represents a node in the list
@@ -57,20 +56,20 @@ func (list LinkedList) Size() int {
 
 // Returns the first element in the list
 // Returns NoSuchElementError if the list is empty
-func (list LinkedList) Front() (interface{}, error.Error) {
+func (list LinkedList) Front() (interface{}, error) {
 	f := list.first
 	if f == nil {
-		return -1, error.NoSuchElementError{}
+		return -1, common.NoSuchElementError{}
 	}
 	return f.item, nil
 }
 
 // Returns the last element in the list
 // Returns NoSuchElementError if the list is empty
-func (list LinkedList) Back() (interface{}, error.Error) {
+func (list LinkedList) Back() (interface{}, error) {
 	l := list.last
 	if l == nil {
-		return -1, error.NoSuchElementError{}
+		return -1, common.NoSuchElementError{}
 	}
 	return l.item, nil
 }
@@ -81,20 +80,20 @@ func (list LinkedList) Back() (interface{}, error.Error) {
 
 // Removes the first node from the list and returns its element
 // Returns NoSuchElementError if the list is empty
-func (list *LinkedList) PopFront() (interface{}, error.Error) {
+func (list *LinkedList) PopFront() (interface{}, error) {
 	f := list.first
 	if f == nil {
-		return -1, error.NoSuchElementError{}
+		return -1, common.NoSuchElementError{}
 	}
 	return list.unlinkFirst(f), nil
 }
 
 // Removes the last node from the list and returns its element
 // Returns NoSuchElementError if the list is empty
-func (list *LinkedList) PopBack() (interface{}, error.Error) {
+func (list *LinkedList) PopBack() (interface{}, error) {
 	l := list.last
 	if l == nil {
-		return -1, error.NoSuchElementError{}
+		return -1, common.NoSuchElementError{}
 	}
 	return list.unlinkLast(l), nil
 }
@@ -112,10 +111,10 @@ func (list *LinkedList) PushBack(e interface{}) {
 // Inserts an element to some position in the list
 // If the position is greater than the size, then OutOfRange error will be returned
 // If the position equals to the current size of list, then PushBack will be called
-func (list *LinkedList) Insert(e interface{}, pos int) error.Error {
+func (list *LinkedList) Insert(e interface{}, pos int) error {
 	if pos > list.Size() || pos < 0 {
 		str := fmt.Sprintf("size is %d while index is %d", list.Size(), pos)
-		return error.OutOfRangeError{str}
+		return common.OutOfRangeError{str}
 	} else if pos == list.Size() {
 		list.PushBack(e)
 	} else if pos == 0 {
@@ -130,10 +129,10 @@ func (list *LinkedList) Insert(e interface{}, pos int) error.Error {
 	return nil
 }
 
-func (list *LinkedList) Erase(pos int) error.Error {
+func (list *LinkedList) Erase(pos int) error {
 	if pos > list.Size()-1 || pos < 0 {
 		str := fmt.Sprintf("size is %d while index is %d", list.Size(), pos)
-		return error.OutOfRangeError{str}
+		return common.OutOfRangeError{str}
 	} else if pos == list.Size()-1 {
 		l := list.last
 		list.unlinkLast(l)
